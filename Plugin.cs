@@ -15,7 +15,7 @@ namespace QuickLook.Plugin.HelloWorld
 
         public bool CanHandle(string path)
         {
-            return !Directory.Exists(path) && path.ToLower().EndsWith(".zzz");
+            return !Directory.Exists(path) && path.ToLower().EndsWith(".shp");
         }
 
         public void Prepare(string path, ContextObject context)
