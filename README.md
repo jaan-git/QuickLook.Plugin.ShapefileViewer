@@ -18,13 +18,14 @@ Read [more](https://en.wikipedia.org/wiki/Shapefile).
 
 2. Make sure that you have QuickLook running in the background. Go to your Download folder, and press <key>Spacebar</key> on the downloaded `.qlplugin` file.
 
-3. Click the “Install” button in the popup window.
+3. Click the <key>Install</key> button in the popup window.
 
 4. Restart QuickLook.
 
-5. Select the shapefile(extension to `.shp`) and press <key>Spacebar</key>, like this:
+5. Select the shapefile(extension to `.shp`) and press <key>Spacebar</key>.
+
 ![shapefile-demo.png](https://raw.github.com/birderyu/attachments/master/QuickLook.Plugin.ShapefileViewer/shapefile-demo.png)
-   
+
 
 ## Development
 
