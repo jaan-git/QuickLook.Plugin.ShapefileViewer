@@ -1,14 +1,11 @@
-﻿using System;
+﻿using DotSpatial.Controls;
+using DotSpatial.Data;
+using QuickLook.Common.Plugin;
+using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using QuickLook.Common.Plugin;
-using SharpMap.Data.Providers;
-using SharpMap.Forms;
-using SharpMap.Layers;
-using static SharpMap.Forms.MapBox;
 
 namespace QuickLook.Plugin.HelloWorld
 {
@@ -36,23 +33,23 @@ namespace QuickLook.Plugin.HelloWorld
             context.Title = $"{Path.GetFileName(path)}";
             try
             {
-                MapBox mapBox = new MapBox()
+                var mapCtrl = new Map()
                 {
-                    Dock = DockStyle.Fill,
-                    ActiveTool = Tools.Pan,
-                    PreviewMode = PreviewModes.Fast
+                    Name = "mapCtrl",
+                    //设置缩放
+                    FunctionMode = FunctionMode.Pan,
+                    Dock = DockStyle.Fill
                 };
                 WindowsFormsHost host = new WindowsFormsHost()
                 {
-                    Child = mapBox,
+                    Child = mapCtrl,
                 };
-                VectorLayer layer = new VectorLayer(Path.GetFileName(path))
-                {
-                    DataSource = new ShapeFile(path, false, true)
-                };
-                mapBox.Map.Layers.Add(layer);
-                mapBox.Map.ZoomToExtents();
-                mapBox.Refresh();
+
+                //添加shp图层
+                var shp = Shapefile.OpenFile(path);
+                mapCtrl.Layers.Add(shp);
+                mapCtrl.ZoomToMaxExtent();
+                mapCtrl.Refresh();
 
                 context.ViewerContent = host;
             }
