@@ -13,6 +13,10 @@ namespace QuickLook.Plugin.HelloWorld
     {
         public int Priority => 0;
 
+        private Map mapCtrl = null;
+        private ContextObject _context = null;
+        private Shapefile shp = null;
+
         public void Init()
         {
             // do nothing
@@ -30,14 +34,15 @@ namespace QuickLook.Plugin.HelloWorld
 
         public void View(string path, ContextObject context)
         {
+            this._context = context;
             context.Title = $"{Path.GetFileName(path)}";
             try
             {
-                var mapCtrl = new Map()
+                mapCtrl = new Map()
                 {
                     Name = "mapCtrl",
                     //设置缩放
-                    FunctionMode = FunctionMode.Pan,
+                    FunctionMode = FunctionMode.Info,
                     Dock = DockStyle.Fill
                 };
                 WindowsFormsHost host = new WindowsFormsHost()
@@ -46,10 +51,12 @@ namespace QuickLook.Plugin.HelloWorld
                 };
 
                 //添加shp图层
-                var shp = Shapefile.OpenFile(path);
+                shp = Shapefile.OpenFile(path);
                 mapCtrl.Layers.Add(shp);
                 mapCtrl.ZoomToMaxExtent();
                 mapCtrl.Refresh();
+
+                mapCtrl.MouseMove += MapCtrl_MouseMove;
 
                 context.ViewerContent = host;
             }
@@ -64,6 +71,17 @@ namespace QuickLook.Plugin.HelloWorld
             {
                 context.IsBusy = false;
             }
+        }
+
+        private void MapCtrl_MouseMove(object sender, MouseEventArgs e)
+        {
+            //将地图和坐标函数绑定
+            GeoMouseArgs args = new GeoMouseArgs(e, mapCtrl);
+
+            //求X、Y轴坐标
+            string xpanel = String.Format("X: {0:0.000000}", args.GeographicLocation.X);
+            string ypanel = String.Format("Y: {0:0.000000}", args.GeographicLocation.Y);
+            this._context.Title = xpanel + " " + ypanel + "    " + shp.Projection.Name;
         }
 
         public void Cleanup()

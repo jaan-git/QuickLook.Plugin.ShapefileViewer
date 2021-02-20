@@ -94,8 +94,8 @@
       <HintPath>packages\DotSpatial.Modeling.Forms.2.0.0-rc1\lib\net40-Client\DotSpatial.Modeling.Forms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DotSpatial.NetTopologySuite, Version=1.14.2.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
-      <HintPath>packages\DotSpatial.NetTopologySuite.1.14.2\lib\net40-client\DotSpatial.NetTopologySuite.dll</HintPath>
+    <Reference Include="DotSpatial.NetTopologySuite, Version=1.14.4.0, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
+      <HintPath>packages\DotSpatial.NetTopologySuite.1.14.4\lib\net40-client\DotSpatial.NetTopologySuite.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DotSpatial.NTSExtension, Version=2.0.0.0, Culture=neutral, PublicKeyToken=928fbfe39f52ea75, processorArchitecture=MSIL">
